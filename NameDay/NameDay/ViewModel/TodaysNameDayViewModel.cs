@@ -22,8 +22,8 @@ namespace NameDay.ViewModel
         {
             mod = new Model.data();
             items = new NamedayData();
-           
-            
+
+            onSearchToday();
           
             onSearchByDate = new Command(onSearchByDateClicked);
             onSearchByName = new Command(onSearchByNameClicked);
@@ -41,17 +41,17 @@ namespace NameDay.ViewModel
             json = new WebClient().DownloadString("https://api.abalin.net/get/today?country=cz");
             items = JsonConvert.DeserializeObject<NamedayData>(json);
         }
-        private void onSearchToday(object sender)
+        private void onSearchToday()
         {
             getData();
             returnName();
         }
-        private void onSearchByNameClicked(object sender)
+        private void onSearchByNameClicked()
         {
             Application.Current.MainPage = new NavigationPage(new View.SearchByNameView());
         }
         
-    private void onSearchByDateClicked(object sender)
+    private void onSearchByDateClicked()
         {
             Application.Current.MainPage = new NavigationPage(new View.SearchByDateView());
         }

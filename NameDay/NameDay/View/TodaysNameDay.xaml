@@ -19,7 +19,7 @@
         <StackLayout >
             <StackLayout Orientation="Horizontal">
             <Label Text="Dnesk má svátek: "/>
-            <Label Text="{Binding Name}"/>
+            <Label  Text="{Binding Name}"/>
             </StackLayout>
             <StackLayout Orientation="Horizontal">
             <Label Text="Den:"/>

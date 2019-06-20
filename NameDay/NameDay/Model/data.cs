@@ -7,7 +7,7 @@ namespace NameDay.Model
     class data
     {
 
-        private string day = "den";
+        private string day;
         public string Day
         {
             get { return day; }
@@ -16,7 +16,7 @@ namespace NameDay.Model
                 day = value;
             }
         }
-        private string month ="měsíc";
+        private string month;
         public string Month
         {
             get { return month; }
@@ -26,7 +26,7 @@ namespace NameDay.Model
             }
         }
         
-        private string name = "Jméno";
+        private string name;
         public string Name
         {
             get { return name; }

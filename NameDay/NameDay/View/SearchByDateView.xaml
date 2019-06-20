@@ -17,7 +17,7 @@
         <StackLayout >
             <StackLayout Orientation="Horizontal">
                 <Label Text="Zadej den 1-31"/>
-            <Entry Text="{Binding Day, Mode=TwoWay}"/>
+            <Entry Text="{Binding Day}"/>
            
                 <Label Text="zadej měsíc 1-12"/>
                 <Entry Text="{Binding Month}"/>

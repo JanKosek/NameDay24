@@ -22,6 +22,7 @@ namespace NameDay.ViewModel
         public Command onSearchByDate { get; private set; }
         public SearchByDateViewModel()
         {
+            
             theDaysBetween = 0;
             today = DateTime.Today;
             mod = new Model.data();

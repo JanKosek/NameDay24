@@ -6,6 +6,7 @@ namespace NameDay.Model
 {
     class data
     {
+
         private string day = "den";
         public string Day
         {
@@ -32,15 +33,6 @@ namespace NameDay.Model
             set
             {
                 name = value;
-            }
-        }
-        private int daysBetween = 0;
-        public int DaysBetween
-        {
-            get { return daysBetween; }
-            set
-            {
-                daysBetween = value;
             }
         }
     }

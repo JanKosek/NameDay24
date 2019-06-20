@@ -32,9 +32,9 @@ namespace NameDay.ViewModel
         }
       private void returnName()
         {
-            Day = items.udaje.Values.ElementAt(0);
-            Month = items.udaje.Values.ElementAt(1);
-            Name = items.udaje.Values.ElementAt(2);
+            Day = items.data.Values.ElementAt(0);
+            Month = items.data.Values.ElementAt(1);
+            Name = items.data.Values.ElementAt(2);
         }
         private void getData()
         {

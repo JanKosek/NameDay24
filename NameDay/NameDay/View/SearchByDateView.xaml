@@ -28,7 +28,7 @@
             </StackLayout>
             <StackLayout Orientation="Horizontal">
                 <Label Text="Tento svátek je za:"/>
-            <Label Text="{Binding daysBetween}"/>
+            <Label Text="{Binding TheDaysBetween}"/>
             <Label Text="Dní"/>
             </StackLayout>
         </StackLayout>

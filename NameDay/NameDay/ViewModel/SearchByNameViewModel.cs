@@ -4,13 +4,16 @@ using System.Text;
 using Xamarin.Forms;
 using System.Net;
 using Newtonsoft.Json;
+using System.Linq;
+using NameDay.Model;
 
 namespace NameDay.ViewModel
 {
     class SearchByNameViewModel : Abstract.ViewModel
     {
+        private int theDaysBetween;
         public string json;
-        public NamedayData items;
+        public SearchByNameData items;
         public Model.data mod;
 
         public Command todaysNameday { get; private set; }
@@ -20,39 +23,57 @@ namespace NameDay.ViewModel
         
        public SearchByNameViewModel()
         {
+            theDaysBetween = 0;
             today = DateTime.Today;
             mod = new Model.data();
-            items = new NamedayData();
+            items = new SearchByNameData();
            
             onSearchByDate = new Command(onSearchByDateClicked);
             todaysNameday = new Command(onTodaysNamedayClicked);
             SearchByName = new Command(onSearchByName);
-            //DaysBetween(today, Convert.ToDateTime(Month + "/" + Day + "/" + "2019"));
+            
 
         } 
         private void getData()
         {
             json = new WebClient().DownloadString("https://api.abalin.net/get/getdate?name="+Name+"&calendar=cz");
-            items = JsonConvert.DeserializeObject<NamedayData>(json);
+            items = JsonConvert.DeserializeObject<SearchByNameData>(json);
+            
         }
         private void onSearchByName()
         {
             getData();
             returnName();
+            if (Day.Length <2)
+            {
+                Day = "0" + Day;
+            }
+            TheDaysBetween = DaysBetween(today, Convert.ToDateTime(Day + "/" + Month + "/" + today.Year +" 00:00:00"));
         }
         private void returnName()
         {
-
-         //   Day = items.udaje.Values.ElementAt(0);
-           // Month = items.udaje.Values.ElementAt(1);
-           // Name = items.udaje.Values.ElementAt(2);
+            for (int i =0; i < items.results.Count; i++)
+            {
+                if (items.results[i].Name.ToUpper() == Name.ToUpper())
+                {
+                    Day = items.results[i].Day;
+                    Month = items.results[i].Month;
+                }
+                
+            }
             
         }
           
         int DaysBetween(DateTime d1, DateTime d2)
         {
             TimeSpan span = d2.Subtract(d1);
-            return Math.Abs((int)span.TotalDays);
+            if (((int)span.TotalDays) < 0)
+            {
+                d2 = Convert.ToDateTime(Day + "/" + Month + "/" + ((int)today.Year+1)+ " 00:00:00");
+                span = d2.Subtract(d1);
+            }
+            return (int)span.TotalDays;
+            
         }
         private void onTodaysNamedayClicked(object sender)
         { 
@@ -92,13 +113,13 @@ namespace NameDay.ViewModel
                 this.OnPropertyChanged("Month");
             }
         }
-        public int daysBetween
+        public int TheDaysBetween
         {
-            get { return mod.DaysBetween; }
+            get { return theDaysBetween; }
             set
             {
-                mod.DaysBetween = value;
-                this.OnPropertyChanged("daysBetween");
+                theDaysBetween = value;
+                this.OnPropertyChanged("TheDaysBetween");
             }
         }
     }

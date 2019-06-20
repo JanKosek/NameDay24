@@ -4,12 +4,14 @@ using System.Text;
 using Xamarin.Forms;
 using Newtonsoft.Json;
 using System.Net;
+using System.Linq;
+using NameDay.Model;
 
 namespace NameDay.ViewModel
 {
     class SearchByDateViewModel : Abstract.ViewModel
     {
-       
+        private int theDaysBetween;
         private Model.data mod;
         public string json;
         public NamedayData items;
@@ -20,19 +22,26 @@ namespace NameDay.ViewModel
         public Command onSearchByDate { get; private set; }
         public SearchByDateViewModel()
         {
+            theDaysBetween = 0;
             today = DateTime.Today;
             mod = new Model.data();
             items = new NamedayData();
             onSearchByName = new Command(onSearchByNameClicked);
             todaysNameday = new Command(onTodaysNamedayClicked);
             onSearchByDate = new Command(onSearchByDateClicked);
-            //DaysBetween(today, Convert.ToDateTime(Month + "/" + Day + "/" + "2019"));
+            
 
         }
         int DaysBetween(DateTime d1, DateTime d2)
         {
             TimeSpan span = d2.Subtract(d1);
-            return Math.Abs((int)span.TotalDays);
+           
+            if (((int)span.TotalDays) < 0)
+            {
+                d2 = Convert.ToDateTime(Day + "/" + Month + "/" + ((int)today.Year + 1) + " 00:00:00");
+                span = d2.Subtract(d1);
+            }
+            return (int)span.TotalDays;
         }
         private void getData()
         {
@@ -43,12 +52,17 @@ namespace NameDay.ViewModel
         {
             getData();
             returnName();
+            if (Day.Length < 2)
+            {
+                Day = "0" + Day;
+            }
+            TheDaysBetween = DaysBetween(today, Convert.ToDateTime(Day + "/" + Month + "/" + "2019" + " 00:00:00"));
         }
         private void returnName()
         {
-            //Day = items.udaje.Values.ElementAt(0);
-            //Month = items.udaje.Values.ElementAt(1);
-            //Name = items.udaje.Values.ElementAt(2);
+            Day = items.data.Values.ElementAt(0);
+            Month = items.data.Values.ElementAt(1);
+            Name = items.data.Values.ElementAt(2);
         }
         private void onTodaysNamedayClicked(object sender)
         {
@@ -85,13 +99,13 @@ namespace NameDay.ViewModel
                 this.OnPropertyChanged("Month");
             }
         }
-        public int daysBetween
+        public int TheDaysBetween
         {
-            get { return mod.DaysBetween; }
+            get { return theDaysBetween; }
             set
             {
-                mod.DaysBetween = value;
-                this.OnPropertyChanged("daysBetween");
+                theDaysBetween = value;
+                this.OnPropertyChanged("TheDaysBetween");
             }
         }
       

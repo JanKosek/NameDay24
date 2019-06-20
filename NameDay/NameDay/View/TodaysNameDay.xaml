@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="NameDay.View.TodaysNameDay"
+             xmlns:viewmodels1="clr-namespace:NameDay.ViewModel"
+             BindingContext="{viewmodels1:TodaysNameDayViewModel}">
+
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Name="MenuSBN" Order="Primary"  Text="Search by Name" Priority="0" Command="{Binding onSearchByName}"/>
+        <ToolbarItem Name="MenuSBD" Order="Primary" Text="Search by Date" Priority="1" Command="{Binding onSearchByDate}"/>
+        <ToolbarItem Name="DoTND" Order="Secondary" Text="Reload today" Command="{Binding searchToday}"/>
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+
+        <StackLayout >
+            <StackLayout Orientation="Horizontal">
+            <Label Text="Dnesk má svátek: "/>
+            <Label Text="{Binding Name}"/>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal">
+            <Label Text="Den:"/>
+            <Label Text="{Binding Day}"/>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal">
+            <Label Text="Měsíc"/>
+            <Label Text="{Binding Month}"/>
+            </StackLayout>
+        </StackLayout>
+        
+    </ContentPage.Content>
+
+</ContentPage>

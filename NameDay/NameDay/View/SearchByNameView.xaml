@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="NameDay.View.SearchByNameView"
+             xmlns:viewmodels2="clr-namespace:NameDay.ViewModel"
+             BindingContext="{viewmodels2:SearchByNameViewModel}">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Name="MenuTND" Order="Primary"  Text="Todays Nameday" Priority="0" Command="{Binding todaysNameday}"/>
+        <ToolbarItem Name="MenuSBD" Order="Primary" Text="Search by Date" Priority="1" Command="{Binding onSearchByDate}"/>
+        <ToolbarItem Name="DoSBN" Order="Secondary" Text="Reload Name" Command="{Binding SearchByName}"/>
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <StackLayout >
+            <StackLayout Orientation="Horizontal">
+                <Entry Text="{Binding Name, Mode=TwoWay}"/>
+                
+            </StackLayout>
+            <StackLayout Orientation="Horizontal">
+                <Label Text="má svátek v "/>
+                <Label Text="{Binding Day}"/>
+                <Label Text="."/>
+                <Label Text="{Binding Month}"/>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal">
+                <Label Text="Tento svátek je za:"/>
+                <Label Text="{Binding daysBetween}"/>
+                <Label Text="Dní"/>
+            </StackLayout>
+
+        </StackLayout>
+    </ContentPage.Content>
+       
+    
+</ContentPage>
